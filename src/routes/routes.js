@@ -1,13 +1,10 @@
 import express from 'express'
 const routes = express.Router()
 
-routes.get('/', (req, res) => {
-    res.json({message: 'Hello from the API'})
-})
+import {home} from '../controllers/controller_api.js'
+import { createData } from '../controllers/controller_pipefy.js';
 
-routes.post('/formulario', (req, res) => {
-    console.log(req.body)
-    res.end()
-})
+routes.get('/', home)
+routes.post('/formulario', createData)
 
 export default routes;
