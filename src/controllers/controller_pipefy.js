@@ -26,8 +26,9 @@ export async function createData(req, res) {
     tampa_pet,
     mensagem
   } = req.body;
-  console.log(req.body)
+  
   const phaseId = 318137351;
+  const newCEP = cep.replace("-","")
   
   try {
     //Registra Formulário na Tabela
@@ -126,7 +127,7 @@ export async function createData(req, res) {
 
   } else {
     //Criar card em Pipe Empresas
-    console.log("aqui")
+
     const pipeIdEmpresa = "302927698";
     const phaseIdEmpresa = "318137351";
 
