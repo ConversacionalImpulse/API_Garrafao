@@ -26,7 +26,7 @@ export async function createData(req, res) {
     tampa_pet,
     mensagem
   } = req.body;
-
+  console.log(req.body)
   const phaseId = 318137351;
   
   try {
