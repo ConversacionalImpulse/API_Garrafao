@@ -1,7 +1,10 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import dotenv from "dotenv";
+import { searchCardEmpresa } from "../services/SearchCardEmpresa.js";
+import { createRecordTable } from "../services/CreateTableRecordFormulario.js";
+import { createAndSearchContato } from "../services/CreateAndSearchContato.js";
+import { createAndSearchEmpresa } from "../services/CreateAndSearchEmpresa.js";
 
-import { createRecordTable } from '../services/service_TableCreate.js'
+dotenv.config();
 
 export async function createData(req, res) {
   const {
@@ -24,65 +27,47 @@ export async function createData(req, res) {
     tampa,
     tampa_vedante,
     tampa_pet,
-    mensagem
+    mensagem,
   } = req.body;
-  
+  console.log(req.body)
+
   const phaseId = 318137351;
-  const newCEP = cep.replace("-","")
-  
+  const newCEP = cep.replace("-", "");
+
   try {
-    //Registra Formulário na Tabela
-    createRecordTable(name,
-      email,
-      empresa,
-      cnpj,
-      estado,
-      cidade,
-      cep,
-      phone,
-      celular,
-      tipo,
-      marca,
-      garrafao_20l_azul,
-      garrafao_20l_rosa,
-      garrafao_20l_verde,
-      garrafao_10l,
-      tampa,
-      tampa_vedante,
-      tampa_pet,
-      mensagem);
-
-    //Buscando dados do Card Empresas
-    const registroCardEmpresa = await fetch("https://api.pipefy.com/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: process.env.AUTH_PIPEFY,
-      },
-      body: JSON.stringify({
-        "query": ` { phase (id:${phaseId}){cards { edges { node { age id title}}}}}`,
-      }),
-    });
-
-    const dataCard = await registroCardEmpresa.json();
-
-    const dadosCardFiltrados = dataCard.data.phase.cards.edges
-    const newArray = []
     
-    dadosCardFiltrados.map((dado) =>{
-      newArray.push(dado.node)
-    })
-    console.log(newArray)
+    //const etiquetaGarrafao = 308171890;
+    /* await createRecordTable(
+        name,
+        email,
+        empresa,
+        cnpj,
+        estado,
+        cidade,
+        cep,
+        phone,
+        celular,
+        tipo,
+        marca,
+        garrafao_20l_azul,
+        garrafao_20l_rosa,
+        garrafao_20l_verde,
+        garrafao_10l,
+        garrafao_pp_20l,
+        tampa,
+        tampa_vedante,
+        tampa_pet,
+        mensagem
+    ); */
+  
+    const contact = await createAndSearchContato(name, celular, phone, email, 5000)
+  
+    const company = await createAndSearchEmpresa(empresa, cnpj, newCEP, cidade, contact[0].node.id, 5000)
+    console.log("contato:", contact)
+    console.log("company:", company)
 
-    const match = []
-
-    newArray.map((object) => {
-        if(object.title == empresa){
-            return match.push(object)
-        }
-    })
-
-    console.log(match)
+    res.status(200).json({ message: "Sucess" });
+    /* 1 - Garrafão Brasil
   
     //Validação da Empresa 
     if(match.length > 0) {
@@ -221,13 +206,9 @@ export async function createData(req, res) {
                   })
               });
         const dataFinal = await novoCardOportunidade.json();
-              console.log(dataFinal)
-        res.status(200).json({ message: "Sucess"});
-
-  }
-
+        console.log(dataFinal) */
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).end();
   }
 }

@@ -58,4 +58,6 @@ export async function createRecordTable (
         }),
     });
     const data = await recordTable.json();
+    console.log("Formulário Registrado")
+    return
 }
