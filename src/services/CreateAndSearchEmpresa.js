@@ -5,11 +5,11 @@ dotenv.config();
 
 export async function createAndSearchEmpresa(empresa, cnpj, newCEP, cidade, contactId, maxWaitTime) {
     const startTime = Date.now();
-    
-    let company = await searchCardEmpresa(empresa);
+    const empresaNome = empresa.toUpperCase()
+    let company = await searchCardEmpresa(empresaNome);
   
     if (company.length === 0) {
-      await createCardEmpresa(empresa, cnpj, newCEP, cidade, contactId);
+      await createCardEmpresa(empresaNome, cnpj, newCEP, cidade, contactId);
   
       while (company.length === 0 && Date.now() - startTime < maxWaitTime) {
         
@@ -17,7 +17,7 @@ export async function createAndSearchEmpresa(empresa, cnpj, newCEP, cidade, cont
           setTimeout(resolve, 1000)
         }); // espera 1 segundo
   
-        company = await searchCardEmpresa(empresa);
+        company = await searchCardEmpresa(empresaNome);
       }
     }
   

@@ -5,8 +5,7 @@ export async function createCardEmpresa (empresa, cnpj, newCEP, cidade, contatoI
 
     const pipeIdEmpresa = "302927698";
     const phaseIdEmpresa = "318137351";
-    const empresaNome = empresa.toUpperCase()
-    
+  
     try{
         const novoCardEmpresa = await fetch('https://api.pipefy.com/graphql',{
                         method: 'POST',
@@ -16,7 +15,7 @@ export async function createCardEmpresa (empresa, cnpj, newCEP, cidade, contatoI
                         },
                         body: JSON.stringify({
                               "query": `mutation{ createCard (input: {pipe_id:${pipeIdEmpresa}  phase_id:${phaseIdEmpresa}  fields_attributes: [
-                                  {field_id: "empresa", field_value: "${empresaNome}"},
+                                  {field_id: "empresa", field_value: "${empresa}"},
                                   {field_id: "contatos", field_value: "${contatoId}"},
                                   {field_id: "cnpj", field_value: "${cnpj}"}, 
                                   {field_id: "cep", field_value: "${newCEP}"},

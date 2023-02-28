@@ -1,8 +1,8 @@
-import {getFormattedDate} from './CreateDataAtual.js'
+import { getFormattedDate } from "../services/CreateDataAtual.js"
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function createCardOportunidade (contactTitle, companyId, mensagem, garrafao_20l_azul, garrafao_10l, tampa) {
+export async function createCardOportunidade (contactTitle, companyId, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet) {
     const pipeIdOportunidade = "302927684"
     const phaseIdOportunidade = "318137273"
     const etiquetaId = "308171890"
@@ -16,20 +16,24 @@ export async function createCardOportunidade (contactTitle, companyId, mensagem,
             },
             body: JSON.stringify({
                           "query": `mutation{ createCard (input: {pipe_id:${pipeIdOportunidade}  phase_id:${phaseIdOportunidade}  fields_attributes: [
-                              {field_id: "oportunidade", field_value: "${contactTitle} - ${formataData(dataAtual)}"},
+                              {field_id: "oportunidade", field_value: "${contactTitle} - ${dataAtual}"},
                               {field_id: "empresa_destino_1", field_value: "${etiquetaId}"}, 
                               {field_id: "origem", field_value: "Formulário Garrafão Brasil"}, 
                               {field_id: "empresa", field_value: "${companyId}"},
                               {field_id: "mensagem", field_value: "${mensagem}"},
-                              {field_id: "quantidade_garraf_o_pp_20l", field_value: "${garrafao_20l_azul}"},
+                              
+                              {field_id: "quantidade_garraf_o_pp_20l", field_value: "${garrafao_pp_20l}"},
+                              {field_id: "quantidade_garraf_o_pet_20l", field_value: "${garrafao_20l_azul}"},
                               {field_id: "quantidade_garraf_o_pp_10l", field_value: "${garrafao_10l}"},
-                              {field_id: "quantidade_tampa_20l", field_value: "${tampa}"}]
+                              {field_id: "quantidade_tampa_20l", field_value: "${tampa}"},
+                              {field_id: "quantidade_tampa_pco_1881", field_value: "${tampa_pet}"}
+                            ]
                               }) 
                               { card {id title }}}`
             })
     });
 
     const novoCardOportunidadeJSON = novoCardOportunidade.json()
-    
+    return
 }
 

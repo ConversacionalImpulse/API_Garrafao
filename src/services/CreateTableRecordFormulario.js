@@ -8,14 +8,10 @@ export async function createRecordTable (
     cep,
     phone,
     celular,
-    tipo,
-    marca,
     garrafao_20l_azul,
-    garrafao_20l_rosa,
-    garrafao_20l_verde,
     garrafao_10l,
+    garrafao_pp_20l,
     tampa,
-    tampa_vedante,
     tampa_pet,
     mensagem) {
     
@@ -39,11 +35,11 @@ export async function createRecordTable (
                             {field_id: "cep", field_value: "${newCEP}"},
                             {field_id: "estado", field_value: "${estado}"},
                             {field_id: "cidade", field_value: "${cidade}"},
-                            {field_id: "garraf_o_pp_20l", field_value: "${garrafao_20l_azul}"},
-                            {field_id: "garraf_o_pet_20l", field_value: ""},
+                            {field_id: "garraf_o_pp_20l", field_value: "${garrafao_pp_20l}"},
+                            {field_id: "garraf_o_pet_20l", field_value: "${garrafao_20l_azul}"},
                             {field_id: "garraf_o_pp_10l", field_value: "${garrafao_10l}"},
                             {field_id: "tampa_20l", field_value: "${tampa}"},
-                            {field_id: "tampa_pco_1881", field_value: " "},
+                            {field_id: "tampa_pco_1881", field_value: "${tampa_pet}"},
                             {field_id: "garraf_o_gua_mineral_20l", field_value: " "},
                             {field_id: "garraf_o_gua_mineral_10l", field_value: " "},
                             {field_id: "tampa_garrafa_pet", field_value: " "},
@@ -58,6 +54,5 @@ export async function createRecordTable (
         }),
     });
     const data = await recordTable.json();
-    console.log("Formulário Registrado")
     return
 }
