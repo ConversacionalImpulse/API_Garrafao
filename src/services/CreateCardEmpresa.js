@@ -61,7 +61,7 @@ export async function createCardEmpresa (name, empresa, celular, email, cnpj, ne
     } if(estado === "TO"){
       estadoExtenso = "Tocantins"
     }
-  
+    
     try{
         const novoCardEmpresa = await fetch('https://api.pipefy.com/graphql',{
                         method: 'POST',

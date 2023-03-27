@@ -29,7 +29,15 @@ export async function createData(req, res) {
     tampa_pet, // Tampa PCO 1881
     mensagem,
   } = req.body;
-  
+  if(!cnpj){
+    cnpj = " "
+  } if(!cep){
+    cep = " "
+  } if(!mensagem){
+    mensagem = " "
+  } if (!empresa){
+    empresa = email
+  }
   const newCEP = cep.replace("-", "");
 
   try {
@@ -52,10 +60,12 @@ export async function createData(req, res) {
         tampa_pet,
         mensagem
     );
+
+    
   
     const company = await createAndSearchEmpresa(name, empresa, celular, email, cnpj, newCEP, estado, cidade, 10000)
   
-    const oportunit = createCardOportunidade(company[0].id ,company[0].title, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet)
+    const oportunit = createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet)
     
     res.status(200).json({ message: "Sucess" });
     

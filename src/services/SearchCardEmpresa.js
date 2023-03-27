@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 
-export async function searchCardEmpresa(empresa) {
+export async function searchCardEmpresa(email) {
   
   const phaseId = 318137351;
   const pipeId = 302927698;
@@ -17,7 +17,17 @@ export async function searchCardEmpresa(empresa) {
           'Authorization': process.env.AUTH_PIPEFY,
         },
         body: JSON.stringify({
-          "query": `{ allCards(pipeId: ${pipeId}, first: 100) { edges { node { id title  } } } }`,
+          "query": `{ findCards(pipeId: "${pipeId}", search: {fieldValue: "${email}", fieldId: "e_mail"}) {
+            edges {
+              node {
+                id
+                fields {
+                  name
+                  value
+                }
+              }
+            }
+          } }`,
         }),
       }
     );
@@ -26,24 +36,31 @@ export async function searchCardEmpresa(empresa) {
     const dadosDosCards = await registrosCardEmpresas.json();
     
     // Apenas os dados dos Cards
-    const Cards = dadosDosCards.data.allCards.edges;
-
-    const CardsInArray = [];
-    const company = [];
-
-    // Filtrando objeto e transformando resultados em array
-    Cards.map((dado) => {
-      CardsInArray.push(dado.node);
-    });
-
-    // Validando se Existe Card com o nome da Empresa cadastrado
-    CardsInArray.map((object) => {
-      if (object.title === empresa) {
-        return company.push(object);
-      }
-    });
+    const Card = dadosDosCards.data.findCards.edges;
     
-    return company;
+    if(Card.length == 0){
+      return {
+        id: null
+      }
+    } else {
+
+      //const CardsInArray = [];
+      //const company = [];
+      // Filtrando objeto e transformando resultados em array
+      /* Card[0].node.fields.map((dado) => {
+        CardsInArray.push(dado.node);
+      }); */
+      /* // Validando se Existe Card com o nome da Empresa cadastrado
+      CardsInArray.map((object) => {
+        if (object.title === empresa) {
+          return company.push(object);
+        }
+      }); */
+      
+      return {
+        id: Card[0].node.id
+      };
+    }
 
   } catch (err) {
     console.log(err);
