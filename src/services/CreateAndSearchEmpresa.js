@@ -7,7 +7,7 @@ export async function createAndSearchEmpresa(name, empresa, celular, email, cnpj
     const startTime = Date.now();
     const empresaNome = empresa.toUpperCase()
 
-    let company = await searchCardEmpresa(email);
+    let company = await searchCardEmpresa(celular);
   
     if (company.id === null) {
       //name, empresa, phone, email, cnpj, newCEP, estado, cidade
@@ -19,7 +19,7 @@ export async function createAndSearchEmpresa(name, empresa, celular, email, cnpj
           setTimeout(resolve, 1000)
         }); // espera 1 segundo
   
-        company = await searchCardEmpresa(email);
+        company = await searchCardEmpresa(celular);
       }
     }
   

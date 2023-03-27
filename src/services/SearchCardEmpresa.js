@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 
-export async function searchCardEmpresa(email) {
+export async function searchCardEmpresa(celular) {
   
   const phaseId = 318137351;
   const pipeId = 302927698;
@@ -17,7 +17,7 @@ export async function searchCardEmpresa(email) {
           'Authorization': process.env.AUTH_PIPEFY,
         },
         body: JSON.stringify({
-          "query": `{ findCards(pipeId: "${pipeId}", search: {fieldValue: "${email}", fieldId: "e_mail"}) {
+          "query": `{ findCards(pipeId: "${pipeId}", search: {fieldValue: "${celular}", fieldId: "celular"}) {
             edges {
               node {
                 id
