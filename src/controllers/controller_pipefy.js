@@ -29,15 +29,7 @@ export async function createData(req, res) {
     tampa_pet, // Tampa PCO 1881
     mensagem,
   } = req.body;
-  if(!cnpj){
-    cnpj = " "
-  } if(!cep){
-    cep = " "
-  } if(!mensagem){
-    mensagem = " "
-  } if (!empresa){
-    empresa = email
-  }
+  
   const newCEP = cep.replace("-", "");
 
   try {
