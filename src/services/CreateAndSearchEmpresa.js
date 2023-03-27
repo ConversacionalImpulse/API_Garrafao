@@ -3,13 +3,15 @@ import { searchCardEmpresa } from "../services/SearchCardEmpresa.js";
 import { createCardEmpresa} from "../services/CreateCardEmpresa.js";
 dotenv.config();
 
-export async function createAndSearchEmpresa(empresa, cnpj, newCEP, cidade, contactId, maxWaitTime) {
+export async function createAndSearchEmpresa(name, empresa, celular, email, cnpj, newCEP, estado, cidade, maxWaitTime) {
     const startTime = Date.now();
     const empresaNome = empresa.toUpperCase()
+
     let company = await searchCardEmpresa(empresaNome);
   
     if (company.length === 0) {
-      await createCardEmpresa(empresaNome, cnpj, newCEP, cidade, contactId);
+      //name, empresa, phone, email, cnpj, newCEP, estado, cidade
+      await createCardEmpresa(name, empresaNome, celular, email, cnpj, newCEP, estado, cidade);
   
       while (company.length === 0 && Date.now() - startTime < maxWaitTime) {
         

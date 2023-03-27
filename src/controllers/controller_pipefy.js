@@ -53,11 +53,9 @@ export async function createData(req, res) {
         mensagem
     );
   
-    const contact = await createAndSearchContato(name, celular, phone, email, 10000)
+    const company = await createAndSearchEmpresa(name, empresa, celular, email, cnpj, newCEP, estado, cidade, 10000)
   
-    const company = await createAndSearchEmpresa(empresa, cnpj, newCEP, cidade, contact[0].node.id, 10000)
-  
-    const oportunit = createCardOportunidade(contact[0].node.title, company[0].id , mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet)
+    const oportunit = createCardOportunidade(company[0].id ,company[0].title, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet)
     
     res.status(200).json({ message: "Sucess" });
     
