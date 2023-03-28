@@ -7,7 +7,7 @@ import { createCardOportunidade } from "../services/CreateCardOportunidade.js"
 dotenv.config();
 
 export async function createData(req, res) {
-  const {
+  let {
     name,
     email,
     empresa,
@@ -30,8 +30,23 @@ export async function createData(req, res) {
     mensagem,
   } = req.body;
   
+  if(!cep){
+    cep = "11111-000"
+  }
   const newCEP = cep.replace("-", "");
 
+  if(!empresa){
+    empresa = "Não Informado"
+  }
+
+  if(!mensagem){
+    mensagem = "Nada Informado"
+  }
+  if(!cnpj){
+    cnpj = "58.282.931/0001-00"
+  }
+
+//47.091.862/0001-30
   try {
     
     //const etiquetaGarrafao = 308171890;
@@ -59,7 +74,7 @@ export async function createData(req, res) {
   
     const oportunit = createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet)
     
-    res.status(200).json({ message: "Sucess" });
+    res.status(200).json({ message: "Sucess", oportunit });
     
   } catch (err) {
     console.log(err);

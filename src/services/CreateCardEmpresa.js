@@ -91,6 +91,6 @@ export async function createCardEmpresa (name, empresa, celular, email, cnpj, ne
         return
 
     } catch (err){
-        console.error(err)
+        console.log(err)
     }
 }
