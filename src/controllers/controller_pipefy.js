@@ -29,6 +29,22 @@ export async function createData(req, res) {
     tampa_pet, // Tampa PCO 1881
     mensagem,
   } = req.body;
+
+  if(!garrafao_20l_azul){
+    garrafao_20l_azul = "0"
+  }
+  if(!garrafao_10l){
+    garrafao_10l = "0"
+  }
+  if(!garrafao_pp_20l){
+    garrafao_pp_20l = "0"
+  }
+  if(!tampa){
+    tampa = "0"
+  }
+  if(!tampa_pet){
+    tampa_pet = "0"
+  }
   
   if(!cep){
     cep = "11111-000"
