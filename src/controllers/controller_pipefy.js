@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 import { createRecordTable } from "../services/CreateTableRecordFormulario.js";
 import { createAndSearchContato } from "../services/CreateAndSearchContato.js";
 import { createAndSearchEmpresa } from "../services/CreateAndSearchEmpresa.js";
-import { createCardOportunidade } from "../services/CreateCardOportunidade.js"
+import { createCardOportunidade } from "../services/CreateCardOportunidade.js";
+import { searchRecordContato } from "../services/SearchTableRecordContato.js";
 
 dotenv.config();
 
@@ -87,8 +88,10 @@ export async function createData(req, res) {
     
   
     const company = await createAndSearchEmpresa(name, empresa, celular, email, cnpj, newCEP, estado, cidade, 10000)
+
+    const idForm = await searchRecordContato(name);
   
-    const oportunit = createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet)
+    const oportunit = createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet, idForm)
     
     res.status(200).json({ message: "Sucess", oportunit });
     
