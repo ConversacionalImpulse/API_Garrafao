@@ -7,7 +7,7 @@ export async function createCardOportunidade (companyId, name, mensagem, garrafa
     const phaseIdOportunidade = "318137273"
     const etiquetaId = "308171890"
     const dataAtual = getFormattedDate()
-
+    
     const novoCardOportunidade = await fetch('https://api.pipefy.com/graphql',{
             method: 'POST',
             headers: {

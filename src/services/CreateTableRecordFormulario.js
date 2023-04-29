@@ -1,3 +1,5 @@
+import crypto from 'node:crypto';
+
 export async function createRecordTable (
     name,
     email,
@@ -17,7 +19,8 @@ export async function createRecordTable (
     
     const newCEP = cep.replace("-","")
     const tableId = "302927808";
-
+    const idUnique = crypto.randomUUID()
+    
     const recordTable = await fetch("https://api.pipefy.com/graphql", {
         method: "POST",
         headers: {
@@ -48,11 +51,11 @@ export async function createRecordTable (
                             {field_id: "termo_encolhivel", field_value: " "},
                             {field_id: "tampa_20l_com_vedante", field_value: " "},
                             {field_id: "mensagem", field_value: "${mensagem}"},
-                            ] 
-                            }) 
-                        { clientMutationId }}`,
+                            {field_id: "id", field_value: "${idUnique}"}
+                        ] }) { table_record { id }}}`,
         }),
     });
     const data = await recordTable.json();
-    return
+    //console.log("ID: ", data.data?.createTableRecord?.table_record?.id)
+    return {idRecord: data.data?.createTableRecord?.table_record?.id}
 }
