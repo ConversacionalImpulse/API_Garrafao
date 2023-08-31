@@ -22,7 +22,7 @@ export async function createData(req, res) {
     garrafao_20l_rosa,
     garrafao_20l_verde,
     garrafao_10l, //Garrafão PP 10L
-    garrafao_pp_20l, //Garrafão PP 20L
+    garrafao_pp_20l, //Garrafão Prime 20L
     tampa, //Tampa 20L
     tampa_vedante,
     tampa_pet, // Tampa PCO 1881
@@ -88,9 +88,12 @@ export async function createData(req, res) {
     const oportunit = createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet, record.idRecord)
     
     res.status(200).json({ message: "Sucess", oportunit });
-    
+
   } catch (err) {
     console.log(err);
     res.status(500).end();
+    
   }
+  
 }
+

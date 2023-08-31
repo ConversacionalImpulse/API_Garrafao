@@ -11,8 +11,8 @@ export async function createCardOportunidade (companyId, name, mensagem, garrafa
     const novoCardOportunidade = await fetch('https://api.pipefy.com/graphql',{
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': process.env.AUTH_PIPEFY
+                "Content-Type": "application/json",
+                "Authorization": process.env.AUTH_PIPEFY
             },
             body: JSON.stringify({
                           "query": `mutation{ createCard (input: {pipe_id:${pipeIdOportunidade}  phase_id:${phaseIdOportunidade}  fields_attributes: [
@@ -23,8 +23,8 @@ export async function createCardOportunidade (companyId, name, mensagem, garrafa
                               {field_id: "empresa", field_value: "${companyId}"},
                               {field_id: "mensagem", field_value: "${mensagem}"},
                               {field_id: "produtos_garraf_o", field_value: ["Garrafão PP 20L", "Garrafão PET 20L","Garrafão PP 10L","Tampa 20L","Tampa PCO 1881"]},
-                              {field_id: "quantidade_garraf_o_pp_20l", field_value: "${garrafao_pp_20l}"},
                               {field_id: "quantidade_garraf_o_pet_20l", field_value: "${garrafao_20l_azul}"},
+                              {field_id: "quantidade_garraf_o_prime_20l", field_value: "${garrafao_pp_20l}"},
                               {field_id: "quantidade_garraf_o_pp_10l", field_value: "${garrafao_10l}"},
                               {field_id: "quantidade_tampa_20l", field_value: "${tampa}"},
                               {field_id: "quantidade_tampa_pco_1881", field_value: "${tampa_pet}"}
@@ -35,6 +35,9 @@ export async function createCardOportunidade (companyId, name, mensagem, garrafa
     });
 
     const novoCardOportunidadeJSON = novoCardOportunidade.json()
+
+    console.log (novoCardOportunidade)
+    
     return
 }
 
