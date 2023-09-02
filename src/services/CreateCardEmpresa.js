@@ -88,6 +88,7 @@ export async function createCardEmpresa (name, empresa, celular, email, cnpj, ne
         });
         
         const dataEmpresa = await novoCardEmpresa.json();
+
         return
 
     } catch (err){

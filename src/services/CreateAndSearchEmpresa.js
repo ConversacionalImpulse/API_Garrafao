@@ -8,7 +8,7 @@ export async function createAndSearchEmpresa(name, empresa, celular, email, cnpj
     const empresaNome = empresa.toUpperCase()
 
     let company = await searchCardEmpresa(celular);
-  
+
     if (company.id === null) {
       //name, empresa, phone, email, cnpj, newCEP, estado, cidade
       await createCardEmpresa(name, empresaNome, celular, email, cnpj, newCEP, estado, cidade);

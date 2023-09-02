@@ -83,11 +83,15 @@ export async function createData(req, res) {
         mensagem
     );
 
+    
+
     const company = await createAndSearchEmpresa(name, empresa, celular, email, cnpj, newCEP, estado, cidade, 10000)
     
-    const oportunit = createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, tampa, tampa_pet, record.idRecord)
+    const oportunit = await createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l, garrafao_20l_azul, garrafao_10l, tampa, tampa_pet, record.idRecord)
     
-    res.status(200).json({ message: "Sucess", oportunit });
+    console.log(record, company, oportunit)
+    
+    res.status(200).json({ message: "Success"});
 
   } catch (err) {
     console.log(err);
