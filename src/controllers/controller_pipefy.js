@@ -61,6 +61,24 @@ export async function createData(req, res) {
     cnpj = "58.282.931/0001-00"
   }
 
+  let vendedor = ""
+
+  if(estado=="CE"){
+    vendedor = "ALINE CRISTINA DE LIMA"
+  }
+  if(estado=="RN"){
+    vendedor = "ALINE CRISTINA DE LIMA"
+  }
+  if(estado=="BA"){
+    vendedor = "AMANDA SILVA"
+  }
+  if(estado=="PE"){
+    vendedor = "AMANDA SILVA"
+  }
+  else{
+    vendedor = "GABRIELLE LOPES MARANHÃO"
+  }
+
 //47.091.862/0001-30
   try {
     
@@ -87,7 +105,7 @@ export async function createData(req, res) {
 
     const company = await createAndSearchEmpresa(name, empresa, celular, email, cnpj, newCEP, estado, cidade, 10000)
     
-    const oportunit = await createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l, garrafao_20l_azul, garrafao_10l, tampa, tampa_pet, record.idRecord)
+    const oportunit = await createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l, garrafao_20l_azul, garrafao_10l, vendedor, tampa, tampa_pet, record.idRecord)
     
     console.log(record, company, oportunit)
     
