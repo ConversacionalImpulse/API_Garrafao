@@ -63,11 +63,11 @@ export async function createData(req, res) {
 
   let id_vendedor = ""
 
-  if(estado=="CE"){
+  if(estado == "CE"){
     id_vendedor = "302273351" //Aline
   }
-  if(estado=="RN"){
-    id_vendedor = "302273351"
+  if(estado == "RN"){
+    id_vendedor = "302273351" //Aline
   }
   else{
     id_vendedor = "302273372" //Amanda
