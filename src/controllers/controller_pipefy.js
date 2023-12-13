@@ -66,7 +66,7 @@ export async function createData(req, res) {
   if(estado == "RN"){
     id_vendedor = "302273351" //Aline
   }
-  if(estado == "CE"){
+  else if(estado == "CE"){
     id_vendedor = "302273351" //Aline
   }
   else{
