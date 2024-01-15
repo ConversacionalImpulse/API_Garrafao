@@ -2,7 +2,7 @@ import { getFormattedDate } from "../services/CreateDataAtual.js"
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function createCardOportunidade (companyId, name, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, id_vendedor, tampa, tampa_pet, gclid, idForm) {
+export async function createCardOportunidade (companyId, name, mensagem, garrafao_pp_20l ,garrafao_20l_azul, garrafao_10l, id_vendedor, tampa, tampa_pet, GCLID, idForm) {
     const pipeIdOportunidade = "302927684"
     const phaseIdOportunidade = "318137273"
     const etiquetaId = "308171890"
@@ -28,7 +28,7 @@ export async function createCardOportunidade (companyId, name, mensagem, garrafa
                               {field_id: "quantidade_garraf_o_pp_10l", field_value: "${garrafao_10l}"},
                               {field_id: "quantidade_tampa_20l", field_value: "${tampa}"},
                               {field_id: "quantidade_tampa_pco_1881", field_value: "${tampa_pet}"},
-                              {field_id: "c_digo_do_gclid", field_value: "${gclid}"}
+                              {field_id: "c_digo_do_gclid", field_value: "${GCLID}"}
                             ]
                               }) 
                               { card {id title }}}`

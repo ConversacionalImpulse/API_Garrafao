@@ -78,7 +78,9 @@ export async function createData(req, res) {
     gclid = "Não possui GCLID"
   }
 
-  console.log("GCLID: ", gclid)
+  let GCLID = gclid.slice(15)
+  
+  console.log("GCLID: ", GCLID)
   console.log("Estado: ", estado)
 
 //47.091.862/0001-30
@@ -107,7 +109,7 @@ export async function createData(req, res) {
 
     const company = await createAndSearchEmpresa(name, empresa, celular, email, cnpj, newCEP, estado, cidade, 10000)
     
-    const oportunit = await createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l, garrafao_20l_azul, garrafao_10l, id_vendedor, tampa, tampa_pet, gclid, record.idRecord)
+    const oportunit = await createCardOportunidade(company.id, name, mensagem, garrafao_pp_20l, garrafao_20l_azul, garrafao_10l, id_vendedor, tampa, tampa_pet, GCLID, record.idRecord)
     
     console.log(record, company, oportunit)
     
