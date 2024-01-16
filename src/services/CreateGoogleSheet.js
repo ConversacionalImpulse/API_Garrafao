@@ -51,6 +51,8 @@ export async function CreateGoogleSheet(gClickID, conversionName, conversionDate
       },
     });
 
+    console.log("Retorno: ", data)
+
     console.log('Nova linha adicionada com sucesso!', data);
   } catch (error) {
     console.error('Erro ao adicionar nova linha:', error.message);
