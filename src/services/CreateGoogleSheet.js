@@ -16,7 +16,7 @@ export async function CreateGoogleSheet(gClickID, conversionName, conversionDate
 
   const auth = new google.auth.JWT({
     email: "api-google-ads@fourth-truck-411419.iam.gserviceaccount.com",
-    key: private_key.replace((/\\n/g, '\n')),
+    key: private_key.split(String.raw`\n`).join('\n'),
     scopes,
   });
 
@@ -59,10 +59,10 @@ export async function CreateGoogleSheet(gClickID, conversionName, conversionDate
       },
     });
 
-    console.log("Retorno: ", data)
+    console.log("Retorno: ", data.data)
 
     console.log('Nova linha adicionada com sucesso!', data);
   } catch (error) {
-    console.error('Erro ao adicionar nova linha:', error.message);
+    console.error('Erro ao adicionar nova linha: ', error.message);
   }
 }
