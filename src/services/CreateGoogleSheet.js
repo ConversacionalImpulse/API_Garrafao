@@ -50,7 +50,7 @@ export async function CreateGoogleSheet(gClickID, conversionName, conversionDate
     ];
 
     // Insere os dados na próxima linha vazia
-    const data = sheets.spreadsheets.values.update({
+    const data = await sheets.spreadsheets.values.update({
         spreadsheetId,
       range: `A${nextRow}`,
       valueInputOption: 'RAW',
