@@ -59,7 +59,7 @@ export async function CreateGoogleSheet(gClickID, conversionName, conversionDate
       },
     });
 
-    //console.log("Retorno: ", sheets)
+    console.log("Retorno: ", sheets)
 
     console.log('Nova linha adicionada com sucesso!');
   } catch (error) {
